@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/miracle_logo.png" alt="MIRACLE API Logo" width="200"/>
+  <img src="/miracle_logo.png" alt="MIRACLE API Logo" width="600"/>
   <h1>MIRACLE API</h1>
   <p><strong>MR Imaging Reference API for Cardiovascular Limits from Evidence</strong></p>
 
