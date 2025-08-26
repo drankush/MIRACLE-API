@@ -280,7 +280,7 @@ results_df.to_csv("results_with_zscores.csv")
   title = {MIRACLE: MR Imaging Reference API for Cardiovascular Limits from Evidence},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/drankush/MIRACLE}
+  url = {https://github.com/drankush/MIRACLE-API}
 }
 ```
 
