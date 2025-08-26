@@ -113,31 +113,154 @@ Full documentation available at [miracleapi.readme.io](https://miracleapi.readme
 ### Ready-to-Use Applications
 
 1. **Z-score Calculator Web App**
-   - Instant clinical parameter interpretation
-   - User-friendly interface
-   - [Demo & Source Code](https://github.com/drankush/MIRACLE-webapp)
+   - React-based frontend with Material-UI components
+   - Real-time validation and calculation
+   - RESTful API integration with error handling
+   - Mobile-responsive design
+   - [Live Demo](https://miracle-webapp.netlify.app) | [Source Code](https://github.com/drankush/MIRACLE-webapp)
 
 2. **Virtual CMR Report Generator**
-   - Comprehensive study interpretation
-   - Automated reference range comparison
-   - Natural language summaries
+   - Batch processing of multiple parameters
+   - Customizable report templates using Handlebars
+   - Export options: PDF, DOCX, JSON
+   - Integration examples with clinical systems
+   ```javascript
+   // Example report generation
+   const report = await miracleAPI.generateReport({
+     patient: { gender: "Male", height: 110, weight: 22 },
+     measurements: {
+       LVEDV: 62,
+       LVEF: 60,
+       LVM: 45
+     },
+     template: "pediatric_standard"
+   });
+   ```
 
 3. **LLM-Powered Chatbot**
-   - Natural language processing
-   - Intelligent measurement interpretation
-   - [Demo & Source Code](https://github.com/drankush/MIRACLE-ChatBot)
+   - OpenAI/Groq function calling architecture
+   - Natural language parsing with structured output
+   - Context-aware conversation handling
+   - Error boundary implementation
+   - [Live Demo](https://miracle-chat.netlify.app) | [Source Code](https://github.com/drankush/MIRACLE-ChatBot)
+   ```javascript
+   // Example function calling schema
+   {
+     "name": "getPediatricVentricleZScore",
+     "parameters": {
+       "type": "object",
+       "properties": {
+         "gender": { "type": "string", "enum": ["Male", "Female"] },
+         "parameter": { "type": "string", "enum": ["LVEDV", "LVEF", "LVM"] },
+         "measured": { "type": "number" },
+         "ht_cm": { "type": "number" },
+         "wt_kg": { "type": "number" }
+       }
+     }
+   }
+   ```
 
 ### AI/LLM Integration
 
-- **LLM-Ready Documentation**: Access via [miracleapi.readme.io/llms.txt](https://miracleapi.readme.io/llms.txt)
-- **MCP Server**: Available at [miracleapi.readme.io/mcp](https://miracleapi.readme.io/mcp)
-- **Function Calling Support**: Built-in OpenAI-compatible schemas
+#### LLM-Ready Documentation
+- Structured markdown format at `/llms.txt`
+- Automated updates via GitHub Actions
+- Endpoint schemas in OpenAPI 3.0
+```bash
+curl https://miracleapi.readme.io/llms.txt
+# Returns markdown-formatted documentation
+```
+
+#### Machine-Readable Endpoints (MCP)
+- OpenAPI specification at `/mcp`
+- JSON Schema validation
+- Rate limiting information
+- Authentication requirements
+```bash
+curl https://miracleapi.readme.io/mcp
+# Returns OpenAPI specification
+```
+
+#### Function Calling Support
+- OpenAI-compatible function definitions
+- Anthropic Claude-ready schemas
+- Groq API integration examples
+- Error handling patterns
+```python
+# Example function registration with OpenAI
+tools = [{
+    "type": "function",
+    "function": {
+        "name": "getPediatricReferenceValues",
+        "description": "Get z-scores for pediatric CMR measurements",
+        "parameters": { ... }
+    }
+}]
+```
 
 ### Research Tools
 
-- Batch processing capabilities
-- CSV input/output support
-- Statistical analysis tools
+#### Current Capabilities
+```python
+# Example: Basic batch processing with current API
+import pandas as pd
+import requests
+
+def process_cmr_data(data_df):
+    base_url = "https://script.google.com/macros/s/.../exec"
+    results = []
+    
+    for _, row in data_df.iterrows():
+        params = {
+            "domain": "Pediatric_Ventricle",
+            "parameter": row["parameter"],
+            "gender": row["gender"],
+            "measured": row["value"],
+            "ht_cm": row["height"],
+            "wt_kg": row["weight"]
+        }
+        response = requests.get(base_url, params=params)
+        results.append(response.json())
+    
+    return pd.DataFrame(results)
+
+# Usage
+df = pd.read_csv("measurements.csv")
+results_df = process_cmr_data(df)
+results_df.to_csv("results_with_zscores.csv")
+```
+
+#### 🛣️ Future Roadmap (Planned Features)
+
+1. **Python Package Development**
+   - Dedicated `miracle-py` package
+   - Easy-to-use batch processing
+   - Statistical analysis utilities
+   ```python
+   # Future API (not yet implemented)
+   from miracle import MiracleBatch
+   processor = MiracleBatch()
+   results = processor.process_csv(...)
+   ```
+
+2. **Research Integration Tools**
+   - DICOM SR templates
+   - REDCap integration
+   - Data validation suite
+   ```python
+   # Planned feature
+   from miracle.export import DicomSRExport  # Coming soon
+   ```
+
+3. **Statistical Analysis Module**
+   - Advanced z-score calculations
+   - Multiple BSA formulas
+   - Automated outlier detection
+   ```python
+   # Future enhancement
+   from miracle.stats import calculate_zscore  # Planned
+   ```
+
 
 ## 📖 Citation
 
