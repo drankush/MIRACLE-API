@@ -7,8 +7,14 @@
   [![API Documentation](https://img.shields.io/badge/Docs-readme.io-blue.svg)](https://miracleapi.readme.io)
   [![Google Apps Script](https://img.shields.io/badge/Powered%20by-Google%20Apps%20Script-orange.svg)](https://developers.google.com/apps-script)
   [![SCMR 2026](https://img.shields.io/badge/SCMR-2026%20Submission-red.svg)](https://scmr.org)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  
   [![Netlify Demo](https://img.shields.io/badge/ChatBot-Netlify-00C7B7.svg)](https://miracle-chat.netlify.app)
   [![Surge Demo](https://img.shields.io/badge/WebApp-Surge-yellow.svg)](https://miracle-app.surge.sh)
+</div>
+
+<div align="center">
+  <h2>🫀 SCMR 2026 Open Source Innovation Submission</h2>
 </div>
 
 ## 🌟 Introduction
@@ -29,6 +35,8 @@ MIRACLE is an open-source API that provides evidence-based reference values for 
 - 📈 Percentile computations
 - 🤖 AI/LLM integration ready
 - 📱 REST API with flexible endpoints
+
+🔗 [View Full API Documentation](https://miracleapi.readme.io/)
 
 ## 🛠️ Getting Started
 
