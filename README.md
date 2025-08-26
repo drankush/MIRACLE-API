@@ -288,10 +288,6 @@ results_df.to_csv("results_with_zscores.csv")
 
 MIT License - See [LICENSE](LICENSE) for details
 
-## 🤝 Contributing
-
-We welcome contributions! See our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
 ---
 
 <div align="center">
