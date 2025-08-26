@@ -186,6 +186,7 @@ curl https://miracleapi.readme.io/llms.txt
 - JSON Schema validation
 - Rate limiting information
 - Authentication requirements
+- Read [Documentation](https://miracleapi.readme.io/reference/mcp#/)
 ```bash
 curl https://miracleapi.readme.io/mcp
 # Returns OpenAPI specification
