@@ -181,7 +181,7 @@ curl https://miracleapi.readme.io/llms.txt
 # Returns markdown-formatted documentation
 ```
 
-#### Machine-Readable Endpoints (MCP)
+#### Model Context Protocol (MCP)
 - OpenAPI specification at `/mcp`
 - JSON Schema validation
 - Rate limiting information
