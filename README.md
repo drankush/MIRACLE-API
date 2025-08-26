@@ -16,7 +16,7 @@ MIRACLE is an open-source API that provides evidence-based reference values for 
 
 ## 🚀 Live Demos
 
-- **Z-score Calculator**: [miracle-webapp.netlify.app](https://miracle-webapp.netlify.app)
+- **Pediatric CMR Reference Calculator**: [miracle-app.surge.sh/](https://miracle-app.surge.sh/)
 - **Interactive Chatbot**: [miracle-chat.netlify.app](https://miracle-chat.netlify.app)
 
 ## ✨ Key Features
@@ -112,12 +112,13 @@ Full documentation available at [miracleapi.readme.io](https://miracleapi.readme
 
 ### Ready-to-Use Applications
 
-1. **Z-score Calculator Web App**
+1. **Pediatric CMR Z-score Calculator Web App**
    - React-based frontend with Material-UI components
    - Real-time validation and calculation
    - RESTful API integration with error handling
    - Mobile-responsive design
-   - [Live Demo](https://miracle-webapp.netlify.app) | [Source Code](https://github.com/drankush/MIRACLE-webapp)
+   - Print support
+   - [Live Demo](https://miracle-app.surge.sh/) | [Source Code](https://github.com/drankush/MIRACLE-webapp)
 
 2. **Virtual CMR Report Generator**
    - Batch processing of multiple parameters
