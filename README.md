@@ -7,7 +7,8 @@
   [![API Documentation](https://img.shields.io/badge/Docs-readme.io-blue.svg)](https://miracleapi.readme.io)
   [![Google Apps Script](https://img.shields.io/badge/Powered%20by-Google%20Apps%20Script-orange.svg)](https://developers.google.com/apps-script)
   [![SCMR 2026](https://img.shields.io/badge/SCMR-2026%20Submission-red.svg)](https://scmr.org)
-  [![Netlify Demo](https://img.shields.io/badge/Demo-Netlify-00C7B7.svg)](https://miracle-chat.netlify.app)
+  [![Netlify Demo](https://img.shields.io/badge/ChatBot-Netlify-00C7B7.svg)](https://miracle-chat.netlify.app)
+  [![Surge Demo](https://img.shields.io/badge/WebApp-Surge-yellow.svg)](https://miracle-app.surge.sh)
 </div>
 
 ## 🌟 Introduction
@@ -16,8 +17,8 @@ MIRACLE is an open-source API that provides evidence-based reference values for 
 
 ## 🚀 Live Demos
 
-- **Pediatric CMR Reference Calculator**: [miracle-app.surge.sh/](https://miracle-app.surge.sh/)
-- **Interactive Chatbot**: [miracle-chat.netlify.app](https://miracle-chat.netlify.app)
+- **Pediatric CMR Reference Calculator**: [miracle-app.surge.sh](https://miracle-app.surge.sh/)
+- **Interactive Chatbot**: [miracle-chat.netlify.app](https://miracle-chat.netlify.app) [![Netlify Status](https://api.netlify.com/api/v1/badges/c197c4ee-b90b-4be8-879d-a9305c6b9823/deploy-status)](https://app.netlify.com/projects/miracle-chat/deploys)
 
 ## ✨ Key Features
 
