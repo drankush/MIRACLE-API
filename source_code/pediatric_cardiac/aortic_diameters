@@ -1,0 +1,140 @@
+/**
+ * @description Handles requests for the PEDS_AORTIC_D domain.
+ */
+
+// --- Helper Functions ---
+
+/**
+ * Calculates Body Surface Area (BSA) in square meters using the Mosteller formula.
+ * BSA (m^2) = sqrt((height(cm) * weight(kg)) / 3600)
+ * @param {number} weightKg - Weight in kilograms.
+ * @param {number} heightCm - Height in centimeters.
+ * @returns {number} The calculated BSA in m^2.
+ * @throws {BadRequestError} if inputs are invalid.
+ */
+function calculateBSA(weightKg, heightCm) {
+  if (weightKg <= 0 || heightCm <= 0) {
+    throw new BadRequestError('Weight and height must be positive values.');
+  }
+  return Math.sqrt((heightCm * weightKg) / 3600);
+}
+
+/**
+ * Approximates the cumulative distribution function (CDF) for a standard normal distribution,
+ * which gives the percentile for a given Z-score.
+ * This uses the Abramowitz and Stegun formula 7.1.26 approximation for the error function (erf).
+ * @param {number} z - The Z-score.
+ * @returns {number} The percentile, from 0.0 to 1.0.
+ */
+function calculatePercentileFromZ(z) {
+  // Save the sign of z
+  const sign = (z >= 0) ? 1 : -1;
+  z = Math.abs(z);
+
+  // Constants for the approximation
+  const p = 0.3275911;
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+
+  const t = 1.0 / (1.0 + p * z);
+  const erf = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-z * z);
+  
+  const cdf = 0.5 * (1.0 + sign * erf);
+  return cdf;
+}
+
+
+/**
+ * Handles GET requests for the 'PEDS_AORTIC_D' domain. It calculates Z-scores for pediatric
+ * aortic diameters based on BSA.
+ *
+ * @param {object} e - The event parameter from doGet.
+ * @param {string} SPREADSHEET_ID - The ID of the spreadsheet.
+ * @returns {object} - A result object to be serialized into JSON.
+ * @throws {BadRequestError} - If required parameters are missing or invalid.
+ * @throws {NotFoundError} - If the specified parameter is not found.
+ */
+function handleRequest_peds_aortic_d(e, SPREADSHEET_ID) {
+  const SHEET_NAME = 'pediatric_cardiac.aortic_diameters';
+  
+  // --- 1. Extract and Validate Parameters ---
+  const { parameter, wt_kg, ht_cm, measured } = e.parameter;
+
+  if (!parameter || !wt_kg || !ht_cm || !measured) {
+    throw new BadRequestError('Missing one or more required parameters: parameter, wt_kg, ht_cm, measured.');
+  }
+
+  const weightKg = parseFloat(wt_kg);
+  const heightCm = parseFloat(ht_cm);
+  const measuredValue = parseFloat(measured);
+
+  if (isNaN(weightKg) || isNaN(heightCm) || isNaN(measuredValue)) {
+    throw new BadRequestError('Invalid input: wt_kg, ht_cm, and measured must all be numeric values.');
+  }
+
+  // --- 2. Perform Initial Calculations ---
+  const bsa = calculateBSA(weightKg, heightCm);
+
+  // --- 3. Fetch and Process Spreadsheet Data ---
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    throw new Error(`Sheet with name '${SHEET_NAME}' was not found.`);
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0].map(h => normalize(h));
+  const rows = data.slice(1);
+  const normalizedParameter = normalize(parameter);
+
+  // --- 4. Find the Matching Row and Get Coefficients ---
+  const paramRow = rows.find(row => normalize(row[headers.indexOf('parameter')]) === normalizedParameter);
+
+  if (!paramRow) {
+    throw new NotFoundError(`The parameter '${parameter}' was not found in the reference data.`);
+  }
+
+  const units = paramRow[headers.indexOf('units')];
+  const a = Number(paramRow[headers.indexOf('a')]);
+  const b = Number(paramRow[headers.indexOf('b')]);
+  const c = Number(paramRow[headers.indexOf('c')]);
+  const sd = Number(paramRow[headers.indexOf('sd')]);
+  
+  // --- 5. Perform Final Calculations ---
+  // Predicted diameter (mm) = a + b * BSA^c
+  const predictedDiameter = a + b * Math.pow(bsa, c);
+
+  // z‑score = (measured diameter − predicted diameter) / SD
+  const zScore = (measuredValue - predictedDiameter) / sd;
+
+  // Lower and upper limits correspond to a z‑score of ‑2 and 2
+  const lowerLimit = predictedDiameter - (2 * sd);
+  const upperLimit = predictedDiameter + (2 * sd);
+
+  const percentile = calculatePercentileFromZ(zScore) * 100; // Convert to percentage
+
+  // --- 6. Format the Response ---
+  const finalResponse = {
+    inputs: {
+      domain: 'PEDS_AORTIC_D',
+      parameter: parameter,
+      wt_kg: wt_kg,
+      ht_cm: ht_cm,
+      measured: measured,
+      calculated_bsa_m2: parseFloat(bsa.toFixed(3))
+    },
+    results: {
+      units: units,
+      mean: parseFloat(predictedDiameter.toFixed(2)),
+      ll: parseFloat(lowerLimit.toFixed(2)),
+      ul: parseFloat(upperLimit.toFixed(2)),
+      calculated_z_score: parseFloat(zScore.toFixed(2)),
+      calculated_percentile: parseFloat(percentile.toFixed(1))
+    }
+  };
+
+  return finalResponse;
+}
