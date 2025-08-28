@@ -1,0 +1,169 @@
+/**
+ * @description Handles requests for the PEDS_PWV domain.
+ * It calculates z-scores for pulse wave velocity (PWV) using the LMS method.
+ */
+
+// ─────── HELPER FUNCTIONS FOR LMS CALCULATIONS (can be shared or duplicated) ────────
+
+/**
+ * Calculates the Z-score using the LMS method.
+ * Handles the special case where L (lambda) is effectively zero.
+ * Formula: Z = [((X/M)^L) - 1] / (L*S)
+ * @param {number} X The measured value.
+ * @param {number} L The lambda value (skewness).
+ * @param {number} M The mu value (median).
+ * @param {number} S The sigma value (coefficient of variation).
+ * @returns {number} The calculated Z-score.
+ */
+function calculateZScore(X, L, M, S) {
+  if (Math.abs(L) < 1e-9) { // Handle case where L is very close to 0
+    return Math.log(X / M) / S;
+  }
+  return (Math.pow(X / M, L) - 1) / (L * S);
+}
+
+/**
+ * Calculates the value (X) for a given Z-score using the inverse LMS formula.
+ * Used to find the lower and upper limits (Z = -2 and Z = 2).
+ * Formula: X = M * (1 + L*S*Z)^(1/L)
+ * @param {number} Z The Z-score.
+ * @param {number} L The lambda value (skewness).
+ * @param {number} M The mu value (median).
+ * @param {number} S The sigma value (coefficient of variation).
+ * @returns {number} The calculated value X.
+ */
+function calculateValueFromZScore(Z, L, M, S) {
+  if (Math.abs(L) < 1e-9) { // Handle case where L is very close to 0
+    return M * Math.exp(Z * S);
+  }
+  return M * Math.pow((L * S * Z) + 1, 1 / L);
+}
+
+/**
+ * Converts a Z-score to a percentile using an approximation of the normal CDF.
+ * @param {number} z The Z-score.
+ * @returns {number} The percentile (0-100).
+ */
+function zScoreToPercentile(z) {
+  // Abramowitz and Stegun formula 26.2.17
+  const p = 0.3275911;
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+
+  const sign = (z < 0) ? -1 : 1;
+  const x = Math.abs(z) / Math.sqrt(2.0);
+  const t = 1.0 / (1.0 + p * x);
+  const erf = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+  const cdf = 0.5 * (1.0 + sign * erf);
+  return cdf * 100;
+}
+
+
+// ─────── DOMAIN-SPECIFIC HANDLER ────────
+
+/**
+ * Handles GET requests for the 'PEDS_PWV' domain.
+ *
+ * @param {object} e - The event parameter from doGet, containing query parameters.
+ * @param {string} SPREADSHEET_ID - The ID of the spreadsheet to use.
+ * @returns {object} - A result object to be serialized into JSON.
+ * @throws {BadRequestError} - If required parameters are missing or invalid.
+ * @throws {NotFoundError} - If no matching data is found in the sheet.
+ */
+function handleRequest_peds_pwv(e, SPREADSHEET_ID) {
+  const SHEET_NAME = 'pediatric_cardiac.PWV';
+
+  // --- 1. Extract and Validate Parameters ---
+  const { parameter, gender, age, measured } = e.parameter;
+
+  if (!parameter || !gender || !age || !measured) {
+    throw new BadRequestError('Missing one or more required parameters: parameter, gender, age, measured.');
+  }
+
+  const measuredValue = parseFloat(measured);
+  if (isNaN(measuredValue) || measuredValue <= 0) {
+    throw new BadRequestError(`Invalid 'measured' value: '${measured}'. It must be a positive number.`);
+  }
+
+  const ageValue = parseFloat(age);
+   if (isNaN(ageValue) || ageValue < 0) {
+    throw new BadRequestError(`Invalid 'age' value: '${age}'. It must be a non-negative number.`);
+  }
+
+  const normalizedParameter = normalize(parameter);
+  const normalizedGender = normalize(gender);
+  const lookupAge = Math.floor(ageValue);
+
+  // --- 2. Fetch and Process Spreadsheet Data ---
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    throw new Error(`Sheet with name '${SHEET_NAME}' was not found.`);
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0].map(h => normalize(h));
+  const rows = data.slice(1);
+
+  // --- 3. Find the Matching Row ---
+  let foundRowData = null;
+
+  for (const row of rows) {
+    // Handle the special '<1' age case in the sheet
+    let sheetAge = row[headers.indexOf('age')];
+    let sheetAgeNumeric = (sheetAge === '<1') ? 0 : parseInt(sheetAge, 10);
+
+    const rowParameter = normalize(row[headers.indexOf('parameter')]);
+    const rowGender = normalize(row[headers.indexOf('gender')]);
+
+    if (
+      rowParameter === normalizedParameter &&
+      rowGender === normalizedGender &&
+      sheetAgeNumeric === lookupAge
+    ) {
+      foundRowData = {
+        L: parseFloat(row[headers.indexOf('l')]),
+        M: parseFloat(row[headers.indexOf('m')]),
+        S: parseFloat(row[headers.indexOf('s')])
+      };
+      break;
+    }
+  }
+
+  // --- 4. Perform Calculations and Format Response ---
+  if (!foundRowData) {
+    throw new NotFoundError(`No reference data found for parameter='${parameter}', gender='${gender}', and age='${age}'.`);
+  }
+
+  const { L, M, S } = foundRowData;
+
+  const zScore = calculateZScore(measuredValue, L, M, S);
+  const percentile = zScoreToPercentile(zScore);
+  const lowerLimit = calculateValueFromZScore(-2, L, M, S);
+  const upperLimit = calculateValueFromZScore(2, L, M, S);
+  
+  const results = {
+    units: "m/s",
+    median_M: M,
+    ll: parseFloat(lowerLimit.toFixed(3)),
+    ul: parseFloat(upperLimit.toFixed(3)),
+    calculated_z_score: parseFloat(zScore.toFixed(2)),
+    calculated_percentile: parseFloat(percentile.toFixed(2))
+  };
+
+  const finalResponse = {
+    inputs: {
+      domain: 'PEDS_PWV',
+      parameter,
+      gender,
+      age,
+      measured
+    },
+    results: results
+  };
+
+  return finalResponse;
+}
