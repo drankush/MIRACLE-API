@@ -21,6 +21,17 @@
 
 MIRACLE is an open-source API that provides evidence-based reference values for cardiovascular magnetic resonance (CMR) measurements. It standardizes the interpretation of CMR studies by offering instant access to peer-reviewed normal ranges, z-scores, and percentiles across multiple clinical domains.
 
+<div align="center">
+  <h3>
+    🔗 View and Test Full API Documentation: 
+    <a href="https://miracleapi.readme.io" target="_blank" rel="noopener noreferrer">
+      miracleapi.readme.io
+    </a>
+  </h3>
+</div>
+
+
+
 ## 🚀 Live Demos
 
 - **Pediatric CMR Reference Calculator**: [miracle-app.surge.sh](https://miracle-app.surge.sh/)
@@ -36,7 +47,7 @@ MIRACLE is an open-source API that provides evidence-based reference values for 
 - 🤖 AI/LLM integration ready
 - 📱 REST API with flexible endpoints
 
-🔗 [View Full API Documentation](https://miracleapi.readme.io/)
+
 
 ## 🛠️ Getting Started
 
