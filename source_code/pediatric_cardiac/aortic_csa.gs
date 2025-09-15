@@ -1,4 +1,4 @@
-/**
+/** File:@aortic_csa.gs
  
  * @description Handles requests for the PEDS_AORTA_CSA domain.
  * It calculates z-scores for aortic cross-sectional area using the LMS method.
@@ -67,7 +67,6 @@ function zScoreToPercentile(z) {
 
 /**
  * Handles GET requests for the 'PEDS_AORTA_CSA' domain.
- * This function is dynamically called by the doGet function in Code.gs.
  *
  * @param {object} e - The event parameter from doGet, containing query parameters.
  * @param {string} SPREADSHEET_ID - The ID of the spreadsheet to use.
@@ -95,7 +94,6 @@ function handleRequest_peds_aorta_csa(e, SPREADSHEET_ID) {
     throw new BadRequestError(`Invalid 'age' value: '${age}'. It must be a non-negative number.`);
   }
 
-  // Assuming normalize() is globally available from Code.gs
   const normalizedParameter = normalize(parameter);
   const normalizedGender = normalize(gender);
   const normalizedLevel = normalize(level);
