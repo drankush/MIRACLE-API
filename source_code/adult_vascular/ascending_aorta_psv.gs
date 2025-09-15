@@ -39,8 +39,7 @@ function isAgeInRange(age, rangeString) {
 
 
 /**
- * Handles GET requests for the 'MPSV_AA_4D' domain. It finds data in the '20_MPSV_AA_4D'
- * sheet based on the parameter and age.
+ * Handles GET requests for the 'MPSV_AA_4D' domain. It finds data based on the parameter and age.
  *
  *
  * @param {object} e - The event parameter from doGet, containing query parameters.
