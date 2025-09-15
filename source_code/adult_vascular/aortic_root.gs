@@ -3,10 +3,9 @@
  */
 
 /**
- * Handles GET requests for the 'AORTIC_ROOT_D' domain. It finds data in the 
+ * Handles GET requests for the 'AORTIC_ROOT_D' domain. 
  *
  * @param {object} e - The event parameter from doGet, containing query parameters.
- * @param {string} SPREADSHEET_ID - The ID of the spreadsheet to use.
  * @returns {object} - A result object to be serialized into JSON.
  * @throws {BadRequestError} - If required parameters are missing.
  * @throws {NotFoundError} - If no matching data is found in the sheet.
