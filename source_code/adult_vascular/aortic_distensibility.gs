@@ -30,7 +30,7 @@ function isAgeInRange(age, rangeString) {
 
 
 /**
- * Handles GET requests for the 'ADULT_AA_DISTENSIBILITY' domain. It finds data in the '29_ADULT_AA_DISTENSIBILITY'
+ * Handles GET requests for the 'ADULT_AA_DISTENSIBILITY' domain. 
  * sheet based on parameter, site, gender, and a specific age.
  *
  *
