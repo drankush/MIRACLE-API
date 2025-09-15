@@ -15,7 +15,7 @@
  * @throws {NotFoundError} - If no matching data is found in the sheet.
  */
 function handleRequest_ta_d(e, SPREADSHEET_ID) {
-  const SHEET_NAME = 'TA_D';
+  const SHEET_NAME = 'adult_vascular.thoracic_aorta_diameter';
   
   // --- 1. Extract and Validate Parameters ---
   const { parameter, gender, phase, technique } = e.parameter;
