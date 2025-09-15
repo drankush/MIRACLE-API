@@ -34,7 +34,7 @@ MIRACLE is an open-source API that provides evidence-based reference values for 
 
 ## 🚀 Live Demos
 
-- **Pediatric CMR Reference Calculator**: [miracle-app.surge.sh](https://miracle-app.surge.sh/) [![Source Code](https://img.shields.io/badge/source_code-GitHub-blue?logo=github)](https://github.com/drankush/MIRACLE-webapp/tree/main)
+- **Pediatric CMR Reference Calculator**: [miracle-app.surge.sh](https://miracle-app.surge.sh/) [![Surge Status](https://img.shields.io/website?url=https%3A%2F%2Fmiracle-app.surge.sh&label=surge&up_message=200%20OK&down_message=down&up_color=brightgreen&down_color=red&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEzIDJMMyAxNGg3bC0xIDggMTAtMTJoLTd6IiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+&style=flat)](https://miracle-app.surge.sh) [![Source Code](https://img.shields.io/badge/source_code-GitHub-blue?logo=github)](https://github.com/drankush/MIRACLE-webapp/tree/main)
 
 - **Interactive Chatbot**: [miracle-chat.netlify.app](https://miracle-chat.netlify.app) [![Netlify Status](https://api.netlify.com/api/v1/badges/c197c4ee-b90b-4be8-879d-a9305c6b9823/deploy-status)](https://app.netlify.com/projects/miracle-chat/deploys) [![Source Code](https://img.shields.io/badge/source_code-GitHub-blue?logo=github)](https://github.com/drankush/MIRACLE-ChatBot/tree/main)
 
