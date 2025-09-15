@@ -1,5 +1,5 @@
 
-/**
+/** File:@atrial_volumes.gs
  * Calculates Body Surface Area (BSA) using the DuBois formula.
  * @param {number} ht_cm Height in centimeters.
  * @param {number} wt_kg Weight in kilograms.
@@ -111,7 +111,6 @@ function loadSheetData_Pediatrics(spreadsheetId, sheetName) {
 
 /**
  * The main handler function for the Pediatrics domain.
- * This function is called by the generic Code.gs engine.
  * @param {Object} e The event object containing request parameters (e.parameter).
  * @param {string} spreadsheetId The ID of the main spreadsheet.
  * @param {number} startTime The timestamp when the request started (for timeout checks).
