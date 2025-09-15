@@ -1,6 +1,5 @@
-/**
+/** File:@ventricular_parameters.gs
  * Handles requests for the ventricular_parameters domain.
- * This function is called by the main doGet router in Code.gs.
  * 
  * @param {Object} e The event parameter from the web request.
  * @param {string} SPREADSHEET_ID The ID of the master spreadsheet.
