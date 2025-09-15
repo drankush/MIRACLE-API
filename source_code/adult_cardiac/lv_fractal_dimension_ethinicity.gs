@@ -4,8 +4,7 @@
  */
 
 /**
- * Handles GET requests for the 'LV_FD_ETHINICITY' domain. It finds data in the 
- *
+ * Handles GET requests for the 'LV_FD_ETHINICITY' domain. 
  *
  * @param {object} e - The event parameter from doGet, containing query parameters.
  * @returns {object} - A result object to be serialized into JSON.
