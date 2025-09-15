@@ -6,7 +6,6 @@
  * Handles GET requests for the 'TA_D' domain. 
  * sheet based on parameter, gender, phase, and technique.
  *
- * This function is dynamically called by the doGet function in Code.gs.
  *
  * @param {object} e - The event parameter from doGet, containing query parameters.
  * @param {string} SPREADSHEET_ID - The ID of the spreadsheet to use.
@@ -24,7 +23,6 @@ function handleRequest_ta_d(e, SPREADSHEET_ID) {
     throw new BadRequestError('Missing one or more required parameters: parameter, gender, phase, technique.');
   }
 
-  // Assuming normalize() is globally available from Code.gs
   const normalizedParameter = normalize(parameter);
   const normalizedGender = normalize(gender);
   const normalizedPhase = normalize(phase);
