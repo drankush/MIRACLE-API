@@ -73,7 +73,7 @@ function handleRequest_lv(e, spreadsheetId, startTime, timeoutMs) {
   }
 
   // --- Open spreadsheet and locate sheet ---
-  const sheetName = 'adult_cardiac.lv_volumetric';
+  const sheetName = '1_lv_volumetric';
   const ss = SpreadsheetApp.openById(spreadsheetId);
   const sheet = ss.getSheetByName(sheetName);
   if (!sheet) throw new NotFoundError(`Sheet '${sheetName}' not found in spreadsheet ${spreadsheetId}`);
