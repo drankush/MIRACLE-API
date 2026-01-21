@@ -1,9 +1,9 @@
 <div align="center">
-  <img src="/miracle_logo.png" alt="MIRACLE API Logo" width="600"/>
+  <img src="miracle_logo.png" alt="MIRACLE API Logo" width="600"/>
   <h1>MIRACLE API</h1>
   <p><strong>MR Imaging Reference API for Cardiovascular Limits from Evidence</strong></p>
 
-  [![Open Source](https://img.shields.io/badge/Open-Source-green.svg)](https://github.com/drankush/MIRACLE)
+  [![Open Source](https://img.shields.io/badge/Open-Source-green.svg)](https://github.com/drankush/MIRACLE-API)
   [![API Documentation](https://img.shields.io/badge/Docs-readme.io-blue.svg)](https://miracleapi.readme.io)
   [![Google Apps Script](https://img.shields.io/badge/Powered%20by-Google%20Apps%20Script-orange.svg)](https://developers.google.com/apps-script)
   [![SCMR 2026](https://img.shields.io/badge/SCMR-2026%20Submission-red.svg)](https://scmr.org)
@@ -57,7 +57,7 @@ MIRACLE is an open-source API that provides evidence-based reference values for 
 
 ```bash
 curl --request GET \
-     --url 'https://script.google.com/macros/s/.../exec?domain=Pediatric_Ventricle&parameter=LVEDV&gender=Male' \
+     --url 'https://ref.miracle-api.workers.dev/exec?domain=Pediatric_Ventricle&parameter=LVEDV&gender=Male' \
      --header 'accept: application/json'
 ```
 
@@ -69,7 +69,7 @@ curl --request GET \
 ```python
 import requests
 
-url = "https://script.google.com/macros/s/.../exec?domain=Pediatric_Ventricle&parameter=LVEDV&gender=Male"
+url = "https://ref.miracle-api.workers.dev/exec?domain=Pediatric_Ventricle&parameter=LVEDV&gender=Male"
 
 headers = {"accept": "application/json"}
 
@@ -85,7 +85,7 @@ print(response.text)
 ```javascript
 const options = {method: 'GET', headers: {accept: 'application/json'}};
 
-fetch('https://script.google.com/macros/s/.../exec?domain=Pediatric_Ventricle&parameter=LVEDV&gender=Male', options)
+fetch('https://ref.miracle-api.workers.dev/exec?domain=Pediatric_Ventricle&parameter=LVEDV&gender=Male', options)
   .then(res => res.json())
   .then(res => console.log(res))
   .catch(err => console.error(err));
@@ -231,7 +231,7 @@ import pandas as pd
 import requests
 
 def process_cmr_data(data_df):
-    base_url = "https://script.google.com/macros/s/.../exec"
+    base_url = "https://ref.miracle-api.workers.dev/exec"
     results = []
     
     for _, row in data_df.iterrows():
