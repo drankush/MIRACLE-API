@@ -256,34 +256,48 @@ results_df.to_csv("results_with_zscores.csv")
 
 #### 🛣️ Future Roadmap (Planned Features)
 
-1. **Python Package Development**
-   - Dedicated `miracle-py` package
-   - Easy-to-use batch processing
-   - Statistical analysis utilities
-   ```python
-   # Future API (not yet implemented)
-   from miracle import MiracleBatch
-   processor = MiracleBatch()
-   results = processor.process_csv(...)
-   ```
+- DICOM SR templates
+- REDCap integration
+- Data validation suite
 
-2. **Research Integration Tools**
-   - DICOM SR templates
-   - REDCap integration
-   - Data validation suite
-   ```python
-   # Planned feature
-   from miracle.export import DicomSRExport  # Coming soon
-   ```
+### 🐍 Python SDK
 
-3. **Statistical Analysis Module**
-   - Advanced z-score calculations
-   - Multiple BSA formulas
-   - Automated outlier detection
-   ```python
-   # Future enhancement
-   from miracle.stats import calculate_zscore  # Planned
-   ```
+The official Python SDK is now available for batch processing and research workflows.
+
+[![PyPI version](https://img.shields.io/pypi/v/miracle-sdk.svg)](https://pypi.org/project/miracle-sdk/)
+[![GitHub](https://img.shields.io/badge/GitHub-MIRACLE--sdk-blue?logo=github)](https://github.com/drankush/MIRACLE-sdk)
+
+**Installation:**
+```bash
+pip install miracle-sdk
+```
+
+**Usage:**
+```python
+from miracle import Miracle, MiracleBatch
+
+# Single request
+client = Miracle()
+result = client.pediatric_ventricle_reference_values(
+    parameter="LVEDV",
+    gender="Male",
+    measured=62.5,
+    ht_cm=110,
+    wt_kg=22
+)
+print(result)
+
+# Batch processing (parallel, high-performance)
+processor = MiracleBatch(max_workers=10)
+df_results = processor.process_csv(
+    file_path="patients.csv",
+    domain="Pediatric_Ventricle",
+    mapping={"gender": "gender", "ht_cm": "height_cm", ...}
+)
+df_results.to_csv("results_with_zscores.csv")
+```
+
+> 📦 **PyPI**: [pypi.org/project/miracle-sdk](https://pypi.org/project/miracle-sdk/) | **GitHub**: [github.com/drankush/MIRACLE-sdk](https://github.com/drankush/MIRACLE-sdk)
 
 
 ## 📖 Citation
@@ -307,8 +321,9 @@ MIT License - See [LICENSE](LICENSE) for details
 <div align="center">
   <p>Made with ❤️ for the CMR community</p>
   <p>
-    <a href="https://miracleapi.readme.io">Documentation</a> •
-    <a href="https://github.com/drankush/MIRACLE-webapp">Web App</a> •
-    <a href="https://github.com/drankush/MIRACLE-ChatBot">Chatbot</a>
+    <a href="https://miracleapi.readme.io">Docs</a> •
+    <a href="https://miracle-app.surge.sh">Web App</a> •
+    <a href="https://miracle-chat.netlify.app">Chatbot</a> •
+    <a href="https://pypi.org/project/miracle-sdk/">SDK</a>
   </p>
 </div>
