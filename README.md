@@ -6,11 +6,16 @@
   [![Open Source](https://img.shields.io/badge/Open-Source-green.svg)](https://github.com/drankush/MIRACLE-API)
   [![API Documentation](https://img.shields.io/badge/Docs-readme.io-blue.svg)](https://miracleapi.readme.io)
   [![Google Apps Script](https://img.shields.io/badge/Powered%20by-Google%20Apps%20Script-orange.svg)](https://developers.google.com/apps-script)
+  [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare%20Workers-miracle--api-orange.svg?logo=cloudflare&logoColor=white)](https://ref.miracle-api.workers.dev/)
+
   [![SCMR 2026](https://img.shields.io/badge/SCMR-2026%20Submission-red.svg)](https://scmr.org)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   
   [![Netlify Demo](https://img.shields.io/badge/ChatBot-Netlify-00C7B7.svg)](https://miracle-chat.netlify.app)
   [![Surge Demo](https://img.shields.io/badge/WebApp-Surge-yellow.svg)](https://miracle-app.surge.sh)
+  [![PyPI](https://img.shields.io/badge/PyPI-miracle--sdk-blue.svg)](https://pypi.org/project/miracle-sdk/)
+
+
 </div>
 
 <div align="center">
