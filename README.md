@@ -114,10 +114,10 @@ fetch('https://ref.miracle-api.workers.dev/exec?domain=Pediatric_Ventricle&param
 
 ### Adult Vascular
 
-| Aortic Root & Valve | Ascending Aorta | Thoracic Aorta | Aortic Elasticity | Pulmonary Artery |
+| Aortic Root & Valve | Ascending Aorta | Thoraco-Abdominal Aorta | Aortic Elasticity | Pulmonary Artery |
 |:---:|:---:|:---:|:---:|:---:|
-| [Aortic Root Diameter](https://miracleapi.readme.io/reference/getaortic_root_d_values#/) | [Ascending Aortic Diameter](https://miracleapi.readme.io/reference/getaa_d_values#/) | [Thoracic Aorta Diameter](https://miracleapi.readme.io/reference/getta_d_values#/) | [Aortic Distensibility by Age](https://miracleapi.readme.io/reference/getadult_aa_distensibility_values#/) | [Adult Pulmonary Artery Dimensions](https://miracleapi.readme.io/reference/getadultpareferencevalues#/) |
-| [Aortic Sinus Diameters and Area](https://miracleapi.readme.io/reference/getasl_da_values#/) | [Ascending Aorta Peak Velocity by Age](https://miracleapi.readme.io/reference/getmpsv_aa_4d_values#/) | [Thoracic Aorta Wall Thickness, Luminal Diameter](https://miracleapi.readme.io/reference/getta_d_a_wl_values#/) | [Aortic PWV by Age](https://miracleapi.readme.io/reference/getadult_pwv_values#/) |  |
+| [Aortic Root Diameter](https://miracleapi.readme.io/reference/getaortic_root_d_values#/) | [Ascending Aortic Diameter](https://miracleapi.readme.io/reference/getaa_d_values#/) | [Thoraco-Abdominal Aorta Diameter](https://miracleapi.readme.io/reference/getta_d_values) | [Aortic Distensibility by Age](https://miracleapi.readme.io/reference/getadult_aa_distensibility_values#/) | [Adult Pulmonary Artery Dimensions](https://miracleapi.readme.io/reference/getadultpareferencevalues#/) |
+| [Aortic Sinus Diameters and Area](https://miracleapi.readme.io/reference/getasl_da_values#/) | [Ascending Aorta Peak Velocity by Age](https://miracleapi.readme.io/reference/getmpsv_aa_4d_values#/) |  | [Aortic PWV by Age](https://miracleapi.readme.io/reference/getadult_pwv_values#/) |  |
 | [Aortic Valve Peak Velocity](https://miracleapi.readme.io/reference/getmavpv_4d_values#/) |  |  |  |  |
 
 
