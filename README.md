@@ -9,7 +9,7 @@
   [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare%20Workers-miracle--api-orange.svg?logo=cloudflare&logoColor=white)](https://ref.miracle-api.workers.dev/)
 
   [![SCMR 2026](https://img.shields.io/badge/SCMR-2026%20Submission-red.svg)](https://scmr.org)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
   
   [![Netlify Demo](https://img.shields.io/badge/ChatBot-Netlify-00C7B7.svg)](https://miracle-chat.netlify.app)
   [![Surge Demo](https://img.shields.io/badge/WebApp-Surge-yellow.svg)](https://miracle-app.surge.sh)
@@ -308,18 +308,22 @@ df_results.to_csv("results_with_zscores.csv")
 ## 📖 Citation
 
 ```bibtex
-@software{Ankush_MIRACLE_2025,
-  author = {Ankush, Ankush},
-  title = {MIRACLE: MR Imaging Reference API for Cardiovascular Limits from Evidence},
-  year = {2025},
-  publisher = {GitHub},
-  url = {https://github.com/drankush/MIRACLE-API}
+@article{ankush2026miracle,
+  title   = {MIRACLE: An Open-Access API for Evidence-Based Reference Values in Cardiovascular MRI},
+  author  = {Ankush, Ankush and Ponnatapura, Janardhana and Sakthivel, Muthu and Sellamuthu, Eswara},
+  journal = {Journal of Cardiovascular Magnetic Resonance},
+  volume  = {28},
+  pages   = {102338},
+  year    = {2026},
+  doi     = {10.1016/j.jocmr.2025.102338}
 }
 ```
 
+Ankush A, et al. **MIRACLE: An Open-Access API for Evidence-Based Reference Values in Cardiovascular MRI.** *Journal of Cardiovascular Magnetic Resonance*. 2026;28:102338. https://doi.org/10.1016/j.jocmr.2025.102338
+
 ## 📄 License
 
-MIT License - See [LICENSE](LICENSE) for details
+Apache License 2.0 - See [LICENSE](LICENSE) for details
 
 ---
 
